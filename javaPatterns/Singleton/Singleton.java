@@ -2,13 +2,15 @@ public final class Student{
     private volatile static Student student;
     private Student(){}
     public static Student getStudendInstance(){
-        if (student==null){
+        Student st = student;
+        if (st==null){
             synchronized(Student.class){
-                if (student == null){
-                    return new Student(); 
+                st = student;
+                if (st == null){
+                    student = st = new Student();
                 }
             }
         }
-       return student;
+       return st;
     }
 }
